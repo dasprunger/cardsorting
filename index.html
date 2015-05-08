@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>card sorting</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="cardsorting.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jquery.cookie.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="handlebars-latest.js"></script>
+    <script type="text/javascript" src="cardsorting.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h3>card sorting</h3>
+			<small>shuffle up!</small>
+		</div>
+        <div class="row" id="infoRow">
+            <div class="col-sm-12">
+                <p>Let's play a game! I just shuffled a deck of cards and I'd 
+                    like to get (part of) your deck to match my order. I won't 
+                    show you my deck, but if you tell me two cards, I'll tell 
+                    you which comes first in my deck.
+                </p>
+                <p>Getting all 52 cards in the right order is quite a task, 
+                    so I'll let you choose a number of cards you'd like put 
+                    in order and we'll only do that many.</p>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="numCards">
+                            how many cards do you want to play with?
+                        </label>
+                        <input type="text" id="numCards" placeholder="enter a number here.">
+                        <a class="btn btn-success" id="setNumCards">let's go!</a>
+                    </div>
+                </form>
+                <p class="after-num">
+                    Ok sweet, we'll play with <span class="fill-nc"></span> cards.
+                    Go grab a deck of cards and pull any random 
+                    <span class="fill-nc"></span> cards out of the deck
+                    and we'll try to get those in order. 
+                </p><p class="after-num"> With that many cards, I
+                    challenge you to figure out the right answer in <span class="fill-p"></span>
+                    steps or less. You'll start with that many points, and each
+                    time you ask me to compare, I'll deduct a point. If you finish
+                    with a postive score, then you did great!
+                </p><p class="after-num">Ready? 
+                <a class="btn btn-success" id="startGame">let's go!</a></p>
+
+            </div>
+        </div>
+		<div class="row" id="compareRow">
+			<div class="col-sm-12">
+				<form class="form-inline">
+					<div class="form-group">
+						<label for="firstCard">enter two cards to compare:</label>
+						<input type="text" id="firstCard" placeholder="First card">
+						<label for="secondCard">vs.</label>
+						<input type="text" id="secondCard" placeholder="Second card">
+						<a class="btn btn-primary btn-sm" id="compareButton">compare!</a>
+					</div>
+					<p class="help-block">(remember: "h" = &hearts;, "c" = &clubs;, "d" = &diams;, and "s" = &spades;)</p>
+				</form>
+			</div>
+		</div>
+		<div class="row" id="historyRow">
+			<div class="col-sm-3">
+				<table class="table table-striped" id="historyTable1">
+                    <tbody>
+                    </tbody>            
+                </table>
+			</div>
+            <div class="col-sm-3">
+                <table class="table table-striped" id="historyTable2">
+                    <tbody>
+                    </tbody>            
+                </table>
+            </div>
+            <div class="col-sm-3">
+                <table class="table table-striped" id="historyTable3">
+                    <tbody>
+                    </tbody>            
+                </table>
+            </div>
+            <div class="col-sm-3">
+                <table class="table table-striped" id="historyTable4">
+                    <tbody>
+                    </tbody>            
+                </table>
+            </div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12" id="finalCheckColumn">
+                <p id="checkText"></p>
+			</div>
+		</div>
+	</div>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5">
+                    <form action="" class="form-inline">
+                        <label for="finalAnswer">your sorted result:</label>
+                        <input type="text" id="finalAnswer">
+                        <a class="btn btn-success btn-sm" id="finalAnswerButton">check me!</a>
+                    </form>
+                </div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-2">
+                    <span style="font-size:x-large;" id="countReg">0</span>
+                    <span>guesses</span>
+                </div>
+                <div class="col-sm-2">
+                    <span style="font-size:x-large;" id="pointReg">--</span>
+                    <span>points</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script id="historyRowTemplate" type="text/x-handlebars-template">
+    <tr>
+        <td>{{ count }}</td>
+        <td>{{ lowerCard }}</td>
+        <td>&lt;</td>
+        <td>{{ higherCard }}</td>
+    </tr>
+</script>
+
+
+
+</html>
