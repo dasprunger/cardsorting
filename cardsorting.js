@@ -35,17 +35,15 @@ function loadDeck() {
 // sanitize text into our standard deck representation
 function compactCardString(text) {
     var ret = text.toLowerCase();
-    ret = ret.replace(/\s/g, "");
-    ret = ret.replace(/[,;-]/g, "");
-    ret = ret.replace("10", "0");
+    ret = ret.replace(/10/g, "0");
     ret = ret.replace("\u2660", "s").replace("\u2665", "h");
     ret = ret.replace("\u2663", "c").replace("\u2666", "d");
+    ret = ret.replace(/[^0-9jqkashcd]/g, "");
     return ret;
 };
 
 function prettyPrintCardString(text) {
-    var ret = text.replace(/\s/g, "");
-    ret = ret.replace(/[,;-]/g, "");
+    var ret = text.replace(/[^0-9jqkashcd]/gi, "");
     ret = ret.replace(/(?:[^1])0/g, "10");
     ret = ret.replace("s", "\u2660").replace("h", "\u2665");
     ret = ret.replace("c", "\u2663").replace("d", "\u2666");
