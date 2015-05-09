@@ -94,6 +94,10 @@ function inOrder(cards) {
     return true;
 }
 
+function countCardsInString(cards) {
+    return compactCardString(cards).length / 2;
+}
+
 function addHistory(firstCard, secondCard) {
     var count = +$("#countReg").text();
     var context = {"count": count + 1};
@@ -124,8 +128,11 @@ function startPosition() {
     $("#infoRow").show();
     $("#compareRow").hide();
     $("#historyRow").hide();
+    $("#historyRow>div>table>tbody").empty();
     $("p.after-num").hide();
     $("#setNumCards").attr("disabled", null);
+    $("#playAgain").hide();
+    $("#checkText").empty();
 }
 
 function readyPosition() {
@@ -135,19 +142,29 @@ function readyPosition() {
     $("p.after-num").show();
 
     var n = +$("#numCards").val();
-    var par = Math.floor(n * Math.log(n)/Math.log(2)) - n;
+    var par = Math.floor(n * Math.log(n)/Math.log(2)) - n + 1;
     $("span.fill-nc").text(n);
     $("span.fill-p").text(par);
     $("#countReg").text(0);
     $("#pointReg").text(par);
 
     $("#setNumCards").attr("disabled", "disabled");
+    $("#playAgain").hide();
 }
 
 function goPosition() {
     $("#infoRow").hide();
     $("#compareRow").show();
     $("#historyRow").show();
+    $("#playAgain").hide();
+}
+
+function playAgainPosition() {
+    $("#infoRow").hide();
+    $("#compareRow").show();
+    $("#historyRow").show();
+    $("#playAgain").show();
+    $("#checkText").text("Yeahhhh!");
 }
 
 $(document).ready(function () {
@@ -168,13 +185,16 @@ $(document).ready(function () {
         addHistory($("#firstCard").val(), $("#secondCard").val());
     });
     $("#finalAnswerButton").click(function() {
-        if (inOrder($("#finalAnswer").val())) {
-            $("#checkText").text("Yeahhhh!");
-            startPosition();
+        var ans = $("#finalAnswer").val();
+        if (inOrder(ans) && countCardsInString(ans) == +$("#numCards").val()) {
+            playAgainPosition();
         }
         else {
             $("#checkText").text("Nope. :(");
         }
+    });
+    $("#playAgain").click(function() {
+        startPosition();
     });
 });
 

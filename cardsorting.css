@@ -16,7 +16,7 @@ body {
 }
 .footer > .container {
     width: auto;
-    max-width: 940px;
+/*    max-width: 940px;*/
     padding: 0 15px;
 /*    margin: auto 0;*/
 }
