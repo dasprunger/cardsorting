@@ -140,7 +140,7 @@ function readyPosition() {
     $("p.after-num").show();
 
     var n = +$("#numCards").val();
-    var par = Math.floor(n * Math.log(n)/Math.log(2)) - n + 1;
+    var par = Math.ceil(n * Math.log(n)/Math.log(2)) - n + 1;
     $("span.fill-nc").text(n);
     $("span.fill-p").text(par);
     $("#countReg").text(0);
