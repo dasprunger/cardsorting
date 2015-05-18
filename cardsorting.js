@@ -193,6 +193,7 @@ $(document).ready(function () {
     });
     $("#playAgain").click(function() {
         startPosition();
+        shuffle();
     });
 });
 
